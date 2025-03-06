@@ -2,7 +2,6 @@ import React from 'react';
 import logo from './logo.svg';
 
 function App() {
-  let slowSpin = "animate 2s linear";
   const formItems = [{id: 1, label: "First Name"}, {id: 2, label: "Last Name"}, {id: 3, label: "Email"},  {id: 4, label: "Date of Birth"}];
   return (
   <div className="flex h-screen bg-blue-100 items-start p-5">

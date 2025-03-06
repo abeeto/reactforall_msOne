@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -7,14 +7,6 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-
-const Heading = ({name} : {name: string}) => React.createElement(
-  "h1",
-  {className: "bg-blue-500 text-center p-4"},
-  "Hi, welcome to this new page",
-  React.createElement("i", {}, `${name}`),
-  React.createElement("a", {href: "https://google.com", className: "text-green-100"}, "Don't look too hard!"),
-)
 
 const BannerDiv = ({name} : {name: string}) => {
   return (

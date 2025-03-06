@@ -1,27 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-
+import AppContainer from './AppContainer';
+import FormHeading from './FormHeading';
 function App() {
-  const formItems = [{id: 1, label: "First Name"}, {id: 2, label: "Last Name"}, {id: 3, label: "Email"},  {id: 4, label: "Date of Birth"}];
+  const formItems = [{id: 1, label: "First Name", type: "text"}, {id: 2, label: "Last Name", type: "text"}, {id: 3, label: "Email", type: "email"},  {id: 4, label: "Date of Birth", type: "date"}];
   return (
-  <div className="flex h-screen bg-blue-100 items-start p-5">
-    <div className="flex flex-row gap-2 flex-grow-1 w-500 items-center mx-auto bg-white shadow-lg rounded-xl pl-5 pr-12 py-5">
-      <img src={logo} className="animate-spin flex-shrink-1 flex-grow-0 w-16" alt="logo" />
-      <h1 className="ml-5 text-center text-xl font-medium flex-grow-1">Welcome to Lesson 5 of $react-typescript with <br/> #tailwindcss</h1>
-      <div className="flex flex-col gap-1">
-      {
-        formItems.map(item => {
-          return (
-            <React.Fragment key={item.id}>
-              <label htmlFor={item.label}>{item.label}</label>
-              <input type="text" />
-            </React.Fragment>
-          )
-        })
-      }
-      </div>
-    </div>
-  </div>
+    <AppContainer>
+      <div className="">
+        <FormHeading/>
+        <div className="flex flex-col">
+        {
+          formItems.map(item => {
+            return (
+              <React.Fragment key={item.id}>
+                <label className="text-m font-medium my-2" htmlFor={item.label}>{item.label}</label>
+                <input className="border border-2 border-grey-200 rounded-md p-2" id={item.label} type={item.type} />
+              </React.Fragment>
+            )
+          })
+        }   
+        </div>
+      </div>   
+    </AppContainer>
   );
 
 }

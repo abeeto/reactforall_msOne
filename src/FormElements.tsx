@@ -1,8 +1,13 @@
 import React from "react";
 
-export default function FormElements({formItems} : {
-    formItems: {id: number, label: string, type:string}[]
-    }) {
+interface formItems {
+  id: number, 
+  label: string, 
+  type:string
+}
+
+
+export default function FormElements({formItems} : {formItems: formItems[]}) {
     return (
         <div className="flex flex-col">
         {

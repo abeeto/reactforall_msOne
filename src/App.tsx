@@ -8,14 +8,13 @@ import FormHome from './FormHome';
 
 function App() {
   const [formOpen, setFormOpen] = useState("HOME");
-  const formItems = [{id: 1, label: "First Name", type: "text"}, {id: 2, label: "Last Name", type: "text"}, {id: 3, label: "Email", type: "email"},  {id: 4, label: "Date of Birth", type: "date"}];
   return (
     <AppContainer>
       <FormHeading/>
       { 
         formOpen === "FORM" ? 
         <>
-          <FormElements formItems={formItems} />
+          <FormElements/>
           <FormSubmit innerText='Submit'/>
         </>
         :

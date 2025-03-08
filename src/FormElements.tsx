@@ -10,7 +10,7 @@ interface formItem {
 
 export default function FormElements() {
   const [newField, setNewField] = useState("");
-  const [formItems, setFormItems] = useState([
+  const [formItems, setFormItems] = useState<formItem[]>([
     {id: 1, label: "First Name", type: "text"}, 
     {id: 2, label: "Last Name", type: "text"}, 
     {id: 3, label: "Email", type: "email"}, 

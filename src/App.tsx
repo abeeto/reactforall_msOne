@@ -30,7 +30,7 @@ function App() {
         <FormBtn onClick={() => {
           setFormOpen("HOME");
         }}
-        innerText="Close Form"/>
+        innerText="Close Form"/>  
       </div>
 
     </AppContainer>

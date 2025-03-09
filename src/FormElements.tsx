@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import React, {useState} from "react";
 import { FormBtn } from "./FormBtn";
 
 interface form {
@@ -12,41 +12,36 @@ interface formFieldElement {
   type:string
 }
 
-interface FormTitleProps {
+interface FormElementsProps {
   formTitle: string;
   setFormTitle: React.Dispatch<React.SetStateAction<string>>;
+  elements: formFieldElement[];
+  setElements: React.Dispatch<React.SetStateAction<formFieldElement[]>>
 }
 
-export default function FormElements({formTitle, setFormTitle} : FormTitleProps) {
+export default function FormElements({formTitle, setFormTitle, elements, setElements} : FormElementsProps) {
   const [newField, setNewField] = useState<string>("");
-  const [formFieldElements, setFormFieldElements] = useState<formFieldElement[]>([
-    {id: 1, label: "First Name", type: "text"}, 
-    {id: 2, label: "Last Name", type: "text"}, 
-    {id: 3, label: "Email", type: "email"}, 
-    {id: 4, label: "Date of Birth", type: "date"}
-  ]);
   const deleteFormFieldElement = (idDelete: number) => {
-    return formFieldElements.filter((item: formFieldElement) => item.id !== idDelete);
+    return elements.filter((item: formFieldElement) => item.id !== idDelete);
   }
-  const titleRef = useRef(null);
     return (
       <div className="flex flex-col">
         <div className="flex flex-row">
-          <input className="border-2 border-grey-200 rounded-md p-2 flex-1" type="text" ref={titleRef} value={formTitle} onChange={(e) => {
+          <input className="border-2 border-grey-200 rounded-md p-2 flex-1" type="text" value={formTitle} onChange={(e) => {
             setFormTitle(e.target.value);
             console.log(formTitle);
           }}/>
         </div>
 
         { 
-          formFieldElements.map(item => {
+          elements.map(item => {
             return (
               <React.Fragment key={item.id}>
                 <label className="text-m font-medium my-2" htmlFor={item.label}>{item.label}</label>
                 <div className="flex flex-row justify-between gap-2">
                   <input className="border-2 border-grey-200 rounded-md p-2 flex-1" id={item.label} type={item.type} />
                   <FormBtn innerText="Delete" onClick={(_)=>{
-                    setFormFieldElements(deleteFormFieldElement(item.id));
+                    setElements(deleteFormFieldElement(item.id));
                   }} className="self-center w-1/5"/>
                 </div>
               </React.Fragment>
@@ -64,12 +59,12 @@ export default function FormElements({formTitle, setFormTitle} : FormTitleProps)
             }
           }/>
           <FormBtn innerText="Add" className="w-1/5"onClick={(_) => {
-            setFormFieldElements([...formFieldElements, {id: Number(new Date()), label: newField, type: "text"}])
+            setElements([...elements, {id: Number(new Date()), label: newField, type: "text"}])
           }}/>
         </div>
-        <FormBtn innerText='Submit' onClick= {(e) => {
+        <FormBtn innerText='Save Form Changes' onClick= {(e) => {
           e.preventDefault();
-          let currentForm:form = {id: Number(new Date()), title: formTitle, elements: formFieldElements};
+          let currentForm:form = {id: Number(new Date()), title: formTitle, elements: elements};
           localStorage.setItem(currentForm.id.toString(), JSON.stringify({title: currentForm.title, elements: currentForm.elements}))
         }}/>
       </div>

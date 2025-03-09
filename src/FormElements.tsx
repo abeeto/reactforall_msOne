@@ -1,35 +1,52 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 import { FormBtn } from "./FormBtn";
-import { text } from "stream/consumers";
 
-interface formItem {
+interface form {
+  id: number,
+  title: string,
+  elements: formFieldElement[]
+}
+interface formFieldElement {
   id: number, 
   label: string, 
   type:string
 }
 
-export default function FormElements() {
-  const [newField, setNewField] = useState("");
-  const [formItems, setFormItems] = useState<formItem[]>([
+interface FormTitleProps {
+  formTitle: string;
+  setFormTitle: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function FormElements({formTitle, setFormTitle} : FormTitleProps) {
+  const [newField, setNewField] = useState<string>("");
+  const [formFieldElements, setFormFieldElements] = useState<formFieldElement[]>([
     {id: 1, label: "First Name", type: "text"}, 
     {id: 2, label: "Last Name", type: "text"}, 
     {id: 3, label: "Email", type: "email"}, 
     {id: 4, label: "Date of Birth", type: "date"}
   ]);
-  const deleteFormItem = (idDelete: number) => {
-    return formItems.filter((item: formItem) => item.id !== idDelete);
+  const deleteFormFieldElement = (idDelete: number) => {
+    return formFieldElements.filter((item: formFieldElement) => item.id !== idDelete);
   }
+  const titleRef = useRef(null);
     return (
       <div className="flex flex-col">
+        <div className="flex flex-row">
+          <input className="border-2 border-grey-200 rounded-md p-2 flex-1" type="text" ref={titleRef} value={formTitle} onChange={(e) => {
+            setFormTitle(e.target.value);
+            console.log(formTitle);
+          }}/>
+        </div>
+
         { 
-          formItems.map(item => {
+          formFieldElements.map(item => {
             return (
               <React.Fragment key={item.id}>
                 <label className="text-m font-medium my-2" htmlFor={item.label}>{item.label}</label>
                 <div className="flex flex-row justify-between gap-2">
                   <input className="border-2 border-grey-200 rounded-md p-2 flex-1" id={item.label} type={item.type} />
                   <FormBtn innerText="Delete" onClick={(_)=>{
-                    setFormItems(deleteFormItem(item.id));
+                    setFormFieldElements(deleteFormFieldElement(item.id));
                   }} className="self-center w-1/5"/>
                 </div>
               </React.Fragment>
@@ -47,9 +64,14 @@ export default function FormElements() {
             }
           }/>
           <FormBtn innerText="Add" className="w-1/5"onClick={(_) => {
-            setFormItems([...formItems, {id: Number(new Date()), label: newField, type: "text"}])
+            setFormFieldElements([...formFieldElements, {id: Number(new Date()), label: newField, type: "text"}])
           }}/>
         </div>
+        <FormBtn innerText='Submit' onClick= {(e) => {
+          e.preventDefault();
+          let currentForm:form = {id: Number(new Date()), title: formTitle, elements: formFieldElements};
+          localStorage.setItem(currentForm.id.toString(), JSON.stringify({title: currentForm.title, elements: currentForm.elements}))
+        }}/>
       </div>
     )
 }

@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import AppContainer from './AppContainer';
 import FormHeading from './FormHeading';
 import FormElements from './FormElements';
-import FormSubmit from './FormSubmit';
 import { FormBtn } from './FormBtn';
 import FormHome from './FormHome';
 
 function App() {
   const [formOpen, setFormOpen] = useState("HOME");
+  const [formTitle, setFormTitle] = useState<string>("Welcome to Lesson 5 of $react-typescript with #tailwindcss");
+
   return (
     <AppContainer>
-      <FormHeading/>
+      <FormHeading innerText={formTitle}/>
       { 
         formOpen === "FORM" ? 
         <>
-          <FormElements/>
-          <FormSubmit innerText='Submit'/>
+          <FormElements formTitle={formTitle} setFormTitle={setFormTitle}/>
         </>
         :
         <FormHome/>

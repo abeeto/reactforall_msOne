@@ -1,7 +1,7 @@
 import { MouseEventHandler, SetStateAction } from "react";
 import logo from "./logo.svg";
 
-export default function FormHome({setSelectedFormKey} :{setSelectedFormKey: React.Dispatch<SetStateAction<string>>}) {
+export default function Home({setSelectedFormKey} :{setSelectedFormKey: React.Dispatch<SetStateAction<string>>}) {
     const handleFormSelect : MouseEventHandler<HTMLDivElement> = (e) => {
         let key = e.currentTarget.dataset.key;
         if (key) {
@@ -17,7 +17,12 @@ export default function FormHome({setSelectedFormKey} :{setSelectedFormKey: Reac
             {
                 Object.keys(localStorage).map((key) => {
                     let item = JSON.parse(localStorage.getItem(key) as string);
-                    return (<div className="text-xl font-thin mb-5 p-3 bg-slate-300" key={key} data-key={key} onClick={handleFormSelect}>{item.title} </div>)
+                    return ( 
+                    <div className="flex flex-row max-w-full justify-end" key={key}>
+                        <div className="text-xl font-thin mb-5 p-3 bg-slate-300 flex-grow rounded-sm">{item.title} </div>
+                        <div className="text-xl cursor-pointer font-medium mb-5 p-3 bg-blue-500 hover:bg-blue-600 grow-1 text-white" data-key={key} onClick={handleFormSelect}>Select</div>
+                        <div className="text-xl cursor-pointer font-medium mb-5 p-3 bg-red-500 hover:bg-red-600 grow-1 rounded-sm text-white" data-key={key}>Delete</div>
+                    </div>)
                 })
             }
             </div>

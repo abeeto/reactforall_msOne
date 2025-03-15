@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import AppContainer from './AppContainer';
-import FormHeading from './FormHeading';
+import Heading from './Heading';
 import FormElements from './FormElements';
 import { FormBtn } from './FormBtn';
-import FormHome from './FormHome';
+import Home from './Home';
 
 
 interface form {
@@ -33,37 +33,31 @@ function App() {
   }, [selectedFormKey])
   return (
     <AppContainer>
-      <FormHeading innerText={formTitle}/>
+      <Heading innerText={formTitle}/>
       { 
         pageOpen === "FORM" ? 
         <>
           <FormElements formTitle={formTitle} setFormTitle={setFormTitle} elements={selectedFormElements} setElements={setSelectedFormElements}/>
+          <FormBtn onClick={() => {
+            if(selectedFormKey) {
+              localStorage.removeItem(selectedFormKey);
+            }}} innerText="Delete Form"/>
+          <FormBtn onClick={() => {
+            setFormTitle("Welcome to Lesson 5 of $react-typescript with #tailwindcss");
+            setPageOpen("HOME");
+          }} innerText="Go Home"/>    
         </>
         :
-        <FormHome setSelectedFormKey={setSelectedFormKey}/>
+        <Home setSelectedFormKey={setSelectedFormKey}/>
       }
       <div className="flex gap-2">
         <FormBtn onClick={() => {
           setPageOpen("FORM");
-        }}
-        innerText="Open Form"/>
-
-        <FormBtn onClick={() => {
-          setFormTitle("Welcome to Lesson 5 of $react-typescript with #tailwindcss");
-          setPageOpen("HOME");
-        }}
-        innerText="Close Form"/>  
-        <FormBtn onClick={() => {
-          if(selectedFormKey) {
-            localStorage.removeItem(selectedFormKey);
-          }
-        }}
-        innerText="Delete Form"/>  
+        }} innerText="Open Form"/>
       </div>
 
     </AppContainer>
   );
-
 }
 
 export default App;

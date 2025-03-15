@@ -19,7 +19,7 @@ interface formFieldElement {
 
 
 function App() {
-  const [formOpen, setFormOpen] = useState("HOME");
+  const [pageOpen, setPageOpen] = useState("HOME");
   const [formTitle, setFormTitle] = useState<string>("Welcome to Lesson 5 of $react-typescript with #tailwindcss");
   const [selectedFormKey, setSelectedFormKey] = useState<string>("");
   const [selectedFormElements, setSelectedFormElements] = useState<formFieldElement[]>([]);
@@ -35,7 +35,7 @@ function App() {
     <AppContainer>
       <FormHeading innerText={formTitle}/>
       { 
-        formOpen === "FORM" ? 
+        pageOpen === "FORM" ? 
         <>
           <FormElements formTitle={formTitle} setFormTitle={setFormTitle} elements={selectedFormElements} setElements={setSelectedFormElements}/>
         </>
@@ -44,13 +44,13 @@ function App() {
       }
       <div className="flex gap-2">
         <FormBtn onClick={() => {
-          setFormOpen("FORM");
+          setPageOpen("FORM");
         }}
         innerText="Open Form"/>
 
         <FormBtn onClick={() => {
           setFormTitle("Welcome to Lesson 5 of $react-typescript with #tailwindcss");
-          setFormOpen("HOME");
+          setPageOpen("HOME");
         }}
         innerText="Close Form"/>  
         <FormBtn onClick={() => {

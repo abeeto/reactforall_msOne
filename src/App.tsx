@@ -32,26 +32,16 @@ function App() {
         <>
           <Form formObj={JSON.parse(
             localStorage.getItem(selectedFormKey) ??
-            `{"id": ${newId}, "title": "Template Form", "elements": [{"id": "1","label": "New Field","type": "text"}]}`
+            `{"id": ${newId}, "title": "Template Form", "elements": [{"id": "1","label": "Name","type": "text"}, {"id": "2","label": "Birthday","type": "date"}, {"id": "3","label": "E-mail","type": "email"}]}`
           )}/>
-          <FormBtn onClick={() => {
-            if(selectedFormKey) {
-              localStorage.removeItem(selectedFormKey);
-            }}} innerText="Delete Form"/>
           <FormBtn onClick={() => {
             setFormTitle("Welcome to Lesson 5 of $react-typescript with #tailwindcss");
             setPageOpen("HOME");
           }} innerText="Go Home"/>    
         </>
         :
-        <Home setSelectedFormKeyCB = {setSelectedFormKey} selectedFormKey={selectedFormKey}/>
+        <Home setSelectedFormKeyCB = {setSelectedFormKey} selectedFormKey={selectedFormKey} setPageOpenCB={setPageOpen}/>
       }
-      <div className="flex gap-2">
-        <FormBtn onClick={() => {
-          setPageOpen("FORM");
-        }} innerText={selectedFormKey ? "Open Form" : "Create New Form"}/>
-      </div>
-
     </AppContainer>
   );
 }

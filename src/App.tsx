@@ -6,18 +6,6 @@ import { FormBtn } from './FormBtn';
 import Home from './Home';
 
 
-interface form {
-  id: number,
-  title: string,
-  elements: formFieldElement[]
-}
-interface formFieldElement {
-  id: number, 
-  label: string, 
-  type:string
-}
-
-
 function App() {
   const [pageOpen, setPageOpen] = useState("HOME");
   const [formTitle, setFormTitle] = useState<string>("Welcome to Lesson 5 of $react-typescript with #tailwindcss");
@@ -40,7 +28,7 @@ function App() {
           }} innerText="Go Home"/>    
         </>
         :
-        <Home setSelectedFormKeyCB = {setSelectedFormKey} selectedFormKey={selectedFormKey} setPageOpenCB={setPageOpen}/>
+        <Home  selectedFormKey={selectedFormKey} setSelectedFormKeyCB = {setSelectedFormKey} setPageOpenCB={setPageOpen}/>
       }
     </AppContainer>
   );

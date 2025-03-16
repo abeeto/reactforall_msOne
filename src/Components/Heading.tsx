@@ -1,12 +1,9 @@
 import logo from '../logo.svg';
-interface innerText {
-  innerText: string;
-}
 export default function Heading() {
     return (
       <div className="flex flex-row gap-2 mb-3 items-center justify-between mx-4 border-b-2 pb-1">
         <img src={logo} className="animate-spin flex-shrink-1 flex-grow-0 w-16" alt="logo" />
-        <div className="flex gap-4">
+        <div className="flex gap-6">
           {
             [
               {page: "Home", url: "/"},

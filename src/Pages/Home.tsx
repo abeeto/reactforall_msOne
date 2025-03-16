@@ -1,5 +1,4 @@
 import { SetStateAction, useState} from "react";
-import logo from "../logo.svg";
 import { FormBtn } from "../Components/FormBtn";
 
 interface HomeProps {
@@ -27,7 +26,7 @@ export default function Home({selectedFormKey, setSelectedFormKeyCB, setPageOpen
     return (
         <div className="flex flex-col box-border mx-4">
             <div className="flex flex-col flex-1">
-                <div className="text-lg">Available Forms:</div>
+                <div className="text-lg mb-3">Available Forms:</div>
                 {
                     availableForms.map((key) => {
                         let item = JSON.parse(localStorage.getItem(key) as string);

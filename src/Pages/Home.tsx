@@ -1,6 +1,6 @@
 import { SetStateAction, useState} from "react";
 import logo from "./logo.svg";
-import { FormBtn } from "./FormBtn";
+import { FormBtn } from "../Components/FormBtn";
 
 interface HomeProps {
     selectedFormKey: string; 

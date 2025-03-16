@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { FormBtn } from "./FormBtn";
+import { FormBtn } from "../Components/FormBtn";
 
 interface form {
   id: number,

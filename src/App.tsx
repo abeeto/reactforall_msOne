@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import AppContainer from './AppContainer';
-import Heading from './Heading';
-import Form from './Form';
-import { FormBtn } from './FormBtn';
-import Home from './Home';
+import AppContainer from './Components/AppContainer';
+import Heading from './Components/Heading';
+import Form from './Pages/Form';
+import Home from './Pages/Home';
+import { FormBtn } from './Components/FormBtn';
 
 function App() {
   const [pageOpen, setPageOpen] = useState("HOME");

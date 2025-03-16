@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import AppContainer from './AppContainer';
 import Heading from './Heading';
 import Form from './Form';

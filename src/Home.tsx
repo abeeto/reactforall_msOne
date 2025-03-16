@@ -35,7 +35,8 @@ export default function Home({selectedFormKey, setSelectedFormKeyCB, setPageOpen
                             let item = JSON.parse(localStorage.getItem(key) as string);
                             return (
                                 <div key={key} data-key={key} onClick={() => handleFormSelect(key)}  className={`text-xl font-thin mb-5 p-3 bg-gray-100 rounded-md flex-grow ${key === selectedFormKey && "border-2 border-blue-500"}`}>
-                                    {item.title}
+                                    <div className="">{item.title}</div>
+                                    <div className="text-sm font-extralight mt-1 text-gray-700">{item.elements.length} questions</div>
                                 </div>
                             )
                         })

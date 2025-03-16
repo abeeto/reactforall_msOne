@@ -5,7 +5,6 @@ import Form from './Form';
 import { FormBtn } from './FormBtn';
 import Home from './Home';
 
-
 function App() {
   const [pageOpen, setPageOpen] = useState("HOME");
   const [formTitle, setFormTitle] = useState<string>("Welcome to Lesson 5 of $react-typescript with #tailwindcss");

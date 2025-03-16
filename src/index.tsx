@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import AppRouter from './Router/AppRouter';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -21,7 +22,7 @@ const BannerDiv = ({name} : {name: string}) => {
 root.render(
   <React.StrictMode>
     <BannerDiv name="Abhinav"/>
-    <App />
+    <AppRouter/>
   </React.StrictMode>
 );
 

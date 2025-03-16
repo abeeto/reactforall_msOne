@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AppContainer from './AppContainer';
 import Heading from './Heading';
-import FormElements from './FormElements';
+import Form from './Form';
 import { FormBtn } from './FormBtn';
 import Home from './Home';
 
@@ -22,22 +22,18 @@ function App() {
   const [pageOpen, setPageOpen] = useState("HOME");
   const [formTitle, setFormTitle] = useState<string>("Welcome to Lesson 5 of $react-typescript with #tailwindcss");
   const [selectedFormKey, setSelectedFormKey] = useState<string>("");
-  const [selectedFormElements, setSelectedFormElements] = useState<formFieldElement[]>([]);
-  useEffect(()=> {
-    if(selectedFormKey) {
-      let form = JSON.parse(localStorage.getItem(selectedFormKey) as string);
-      setSelectedFormElements(form.elements);
-      setFormTitle(form.title);
-      console.log(form);
-    }
-  }, [selectedFormKey])
+
+  let newId = Number(new Date());
   return (
     <AppContainer>
       <Heading innerText={formTitle}/>
       { 
         pageOpen === "FORM" ? 
         <>
-          <FormElements formTitle={formTitle} setFormTitle={setFormTitle} elements={selectedFormElements} setElements={setSelectedFormElements}/>
+          <Form formObj={JSON.parse(
+            localStorage.getItem(selectedFormKey) ??
+            `{"id": ${newId}, "title": "Template Form", "elements": [{"id": "1","label": "New Field","type": "text"}]}`
+          )}/>
           <FormBtn onClick={() => {
             if(selectedFormKey) {
               localStorage.removeItem(selectedFormKey);
@@ -48,10 +44,11 @@ function App() {
           }} innerText="Go Home"/>    
         </>
         :
-        <Home setSelectedFormKey={setSelectedFormKey}/>
+        <Home setSelectedFormKeyCB = {setSelectedFormKey} selectedFormKey={selectedFormKey}/>
       }
       <div className="flex gap-2">
         <FormBtn onClick={() => {
+          console.log(selectedFormKey)
           setPageOpen("FORM");
         }} innerText="Open Form"/>
       </div>

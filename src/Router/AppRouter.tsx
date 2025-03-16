@@ -1,6 +1,7 @@
 import { useRoutes } from 'raviger'
-import About from "../Components/About";
+import About from "../Pages/About";
 import App from '../App';
+import AppContainer from '../Components/AppContainer';
 
 const routes = {
   '/': () => <App />,
@@ -10,5 +11,5 @@ const routes = {
 
 export default function AppRouter() {
     let routeResult = useRoutes(routes);
-    return routeResult;
+    return <AppContainer>{routeResult}</AppContainer>;
 }

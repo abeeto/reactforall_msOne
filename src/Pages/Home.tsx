@@ -1,5 +1,5 @@
 import { SetStateAction, useState} from "react";
-import logo from "./logo.svg";
+import logo from "../logo.svg";
 import { FormBtn } from "../Components/FormBtn";
 
 interface HomeProps {

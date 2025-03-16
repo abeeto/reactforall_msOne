@@ -48,9 +48,8 @@ function App() {
       }
       <div className="flex gap-2">
         <FormBtn onClick={() => {
-          console.log(selectedFormKey)
           setPageOpen("FORM");
-        }} innerText="Open Form"/>
+        }} innerText={selectedFormKey ? "Open Form" : "Create New Form"}/>
       </div>
 
     </AppContainer>

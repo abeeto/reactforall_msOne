@@ -1,7 +1,7 @@
-import React, {SetStateAction, useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import { FormBtn } from "./FormBtn";
 
-interface Form {
+interface form {
   id: number,
   title: string,
   elements: formFieldElement[]
@@ -12,7 +12,7 @@ interface formFieldElement {
   type:string
 }
 interface formProps {
-  formObj: Form;
+  formObj: form;
 }
 
 export default function Form({formObj} : formProps) {
@@ -65,7 +65,7 @@ export default function Form({formObj} : formProps) {
         }}/>
       </div>
       <FormBtn innerText='Save Form Changes' onClick= {(e) => {
-        let currentForm:Form = {...formObj, elements: formFields};
+        let currentForm:form = {...formObj, elements: formFields};
         localStorage.setItem(currentForm.id.toString(), JSON.stringify({...formObj, title: formTitle, elements: formFields}))
       }}/>
     </div>

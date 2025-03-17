@@ -1,3 +1,4 @@
+import { navigate } from "raviger";
 import { useState} from "react";
 
 export default function Home() {
@@ -16,7 +17,29 @@ export default function Home() {
         setAvailableForms(availableForms.filter((currentKey) => currentKey !== selectedFormKey));
         localStorage.removeItem(selectedFormKey);
     }
-
+    const createNewForm = () => {
+        let newId = String(Date.now()); 
+        let newFormObj = {
+          id: newId,
+          title: 'Template Form',
+          elements: [
+            { id: '1', label: 'Name', type: 'text' },
+            { id: '2', label: 'Birthday', type: 'date' },
+            { id: '3', label: 'E-mail', type: 'email' },
+          ],
+        };
+        localStorage.setItem(newId, JSON.stringify(newFormObj));
+        setAvailableForms(Object.keys(localStorage));
+        navigate(`/form/${newId}`);
+      };
+    
+      const handleOpenOrCreateForm = () => {
+        if (selectedFormKey) {
+          navigate(`/form/${selectedFormKey}`);
+        } else {
+          createNewForm();
+        }
+      };
     const [availableForms, setAvailableForms] = useState(Object.keys(localStorage));
     return (
         <div className="flex flex-col box-border mx-4">
@@ -34,7 +57,7 @@ export default function Home() {
                     })
                 }
                 <div className="flex flex-row justify-between gap-2">
-                    <a className="text-xl cursor-pointer font-medium mb-2 py-2 px-4 flex-1-1-[15vw] bg-blue-500 hover:bg-blue-600 text-center rounded-md text-white" href={`/form/${selectedFormKey}`}>{selectedFormKey ? "Open Form" : "Create New Form"}</a>
+                    <div className="text-xl cursor-pointer font-medium mb-2 py-2 px-4 flex-1-1-[15vw] bg-blue-500 hover:bg-blue-600 text-center rounded-md text-white" onClick={handleOpenOrCreateForm}>{selectedFormKey ? "Open Form" : "Create New Form"}</div>
                     <div className="text-xl cursor-pointer font-medium mb-2 py-2 px-4 flex-1-1-[15vw] bg-red-500 hover:bg-red-600 text-center rounded-md text-white" onClick={handleFormDelete}>Delete</div>
                 </div>
             </div>

@@ -16,7 +16,7 @@ interface formProps {
 }
 
 export default function Form({formId} : formProps) {
-  const formObj: form = JSON.parse(localStorage.getItem(formId) ?? `{"id": ${Number(new Date())}, "title": "Template Form", "elements": [{"id": "1","label": "Name","type": "text"}, {"id": "2","label": "Birthday","type": "date"}, {"id": "3","label": "E-mail","type": "email"}]}`);
+  const formObj: form = JSON.parse(localStorage.getItem(formId) as string);
   const [formTitle, setFormTitle] = useState<string>(formObj.title);
   const [formFields, setFormFields] = useState<formFieldElement[]>(formObj.elements);
   const [newField, setNewField] = useState<string>("");

@@ -3,8 +3,8 @@ import { useEffect, useState} from "react";
 
 export default function Home() {
     const [selectedFormKey, setSelectedFormKey] = useState<string>("");
-    const [searchString, setSearchString] = useState<string>("");
     const [{search}, setQuery] = useQueryParams();
+    const [searchString, setSearchString] = useState<string>(search || "");
     const handleFormSelect = (key  : string ) => {
         if (key) {
             if (key === selectedFormKey) {
@@ -43,7 +43,7 @@ export default function Home() {
       };
     const [availableForms, setAvailableForms] = useState(Object.keys(localStorage));
     useEffect(() => {
-        setQuery({string: searchString});
+        setQuery({search: searchString});
     }, [searchString, setQuery])
     return (
         <div className="flex flex-col box-border mx-4">
@@ -54,14 +54,14 @@ export default function Home() {
                 }}>
                     <label htmlFor="searchTitle">Search</label>
                     <input className="border-2 border-grey-200 rounded-md p-2 flex-1" id="searchTitle" name="q" type="text" onChange={(e) => {
-                        setSearchString(e.target.value);
+                        setSearchString(e.target.value.toLowerCase());
                     }} />
                 </form>
                 <div className="text-lg mb-3">Available Forms:</div>
                 {
                     availableForms.filter((key => {
                         let formObj = JSON.parse(localStorage.getItem(key) || "")
-                        return formObj.title.includes(searchString);
+                        return formObj.title.toLowerCase().includes(searchString);
                     })).map((key) => {
                         let item = JSON.parse(localStorage.getItem(key) as string);
                         return (

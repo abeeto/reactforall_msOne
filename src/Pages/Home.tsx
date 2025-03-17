@@ -1,20 +1,15 @@
-import { SetStateAction, useState} from "react";
-import { FormBtn } from "../Components/FormBtn";
+import { useState} from "react";
 
-interface HomeProps {
-    selectedFormKey: string; 
-    setSelectedFormKeyCB: React.Dispatch<SetStateAction<string>>
-    setPageOpenCB: React.Dispatch<SetStateAction<string>>
-}
+export default function Home() {
+    const [selectedFormKey, setSelectedFormKey] = useState<string>("");
 
-export default function Home({selectedFormKey, setSelectedFormKeyCB, setPageOpenCB}: HomeProps) {
     const handleFormSelect = (key  : string ) => {
         if (key) {
             if (key === selectedFormKey) {
-                setSelectedFormKeyCB("");
+                setSelectedFormKey("");
                 return;
             }
-            setSelectedFormKeyCB(key);
+            setSelectedFormKey(key);
         }
     }
     const handleFormDelete = () => {
@@ -39,7 +34,7 @@ export default function Home({selectedFormKey, setSelectedFormKeyCB, setPageOpen
                     })
                 }
                 <div className="flex flex-row justify-between gap-2">
-                    <FormBtn className="text-xl cursor-pointer font-medium mb-2 py-2 px-4 flex-1-1-[15vw] bg-blue-500 hover:bg-blue-600 text-center rounded-md text-white" onClick={() => {setPageOpenCB("FORM");}} innerText={selectedFormKey ? "Open Form" : "Create New Form"}/>
+                    <a className="text-xl cursor-pointer font-medium mb-2 py-2 px-4 flex-1-1-[15vw] bg-blue-500 hover:bg-blue-600 text-center rounded-md text-white" href={`/form/${selectedFormKey}`}>{selectedFormKey ? "Open Form" : "Create New Form"}</a>
                     <div className="text-xl cursor-pointer font-medium mb-2 py-2 px-4 flex-1-1-[15vw] bg-red-500 hover:bg-red-600 text-center rounded-md text-white" onClick={handleFormDelete}>Delete</div>
                 </div>
             </div>
